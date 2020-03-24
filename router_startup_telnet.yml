@@ -1,0 +1,16 @@
+---
+
+- name: Setup new routers for ssh access
+  hosts: new_routers
+  gather_facts: false
+  connection: local
+  tasks:
+  - telnet:
+      login_prompt: "Password: "
+      password: cisco
+      prompts:
+      - "[>#]"
+      command:
+      - terminal length 0
+      - show version
+      - configure terminal

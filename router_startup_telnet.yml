@@ -7,15 +7,13 @@
   tasks:
   - telnet:
       login_prompt: "Password: "
-      password: cisco
+      password: "{{ new_router_password }}"
       prompts:
       - "[>#]"
       command:
       - terminal length 0
       - show version
       - configure terminal
-      - int lo
-      - ip add 1.1.1.1 255.255.255.255
-      - no shut
+      - username cisco privilege 15
       - end
       - copy run start

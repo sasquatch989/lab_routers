@@ -7,7 +7,7 @@
   tasks:
   - telnet:
       login_prompt: "Password: "
-      password: {{ new_router_password }}
+      password: "{{ new_router_password }}"
       prompts:
       - "[>#]"
       command:

@@ -14,6 +14,14 @@
       - terminal length 0
       - show version
       - configure terminal
-      - username cisco privilege 15
+      - username ansible privilege 15 secret "{{ default_user_password }}"
+      - exit
+      - line vty 0 4
+      - transport input all
+      - login local
+      - exit
+      - ip domain-name "{{ ip_domain_name }}"
+      - exit
+      - crypto key generate rsa
       - end
       - copy run start

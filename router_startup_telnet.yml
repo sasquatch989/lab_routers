@@ -15,7 +15,6 @@
       - show version
       - configure terminal
       - username ansible privilege 15 secret "{{ default_user_password }}"
-      - exit
       - line vty 0 4
       - transport input all
       - login local

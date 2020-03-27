@@ -1,7 +1,8 @@
 #!/bin/bash
 
 
-
+BASEDIR=$(dirname "$0")
+cd "$BASEDIR"
 
 
 get_routers() {
@@ -9,7 +10,7 @@ get_routers() {
   printf "[lab-routers]\n%s" "$ROUTERS" > lab-routers.ini
 }
   
-prep_git() {
+prep_git() {	
   if git status | grep lab-routers; then
 	git add lab-routers.*
   else

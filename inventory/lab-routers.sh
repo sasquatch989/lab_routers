@@ -12,6 +12,8 @@ get_routers() {
 prep_git() {
   if git status | grep lab-routers; then
 	git add lab-routers.*
+  else
+     exit
   fi
 }
 

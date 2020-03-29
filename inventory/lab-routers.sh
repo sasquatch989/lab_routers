@@ -14,8 +14,9 @@ prep_git() {
   git fetch	
   if git status | grep lab-routers; then
 	git add lab-routers.*
+	ship_it
   else
-     exit
+     exit 0
   fi
 }
 
@@ -27,7 +28,6 @@ ship_it() {
 main() {
   get_routers
   prep_git
-  ship_it
 }
 
 

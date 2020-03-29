@@ -1,7 +1,7 @@
 ---
 
 - name: network2
-  connection: nnetwork_cli
+  connection: network_cli
   hosts: all
   tasks:
   - name: Check router onfig

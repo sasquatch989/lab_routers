@@ -20,7 +20,7 @@ prep_git() {
 
 ship_it() { 
   git commit -m "Updated lab-routers inventory"
-  git push -f origin master
+  git push origin master
 }
 
 main() {

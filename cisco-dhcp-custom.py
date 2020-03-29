@@ -1,20 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-"""
-Example custom dynamic inventory script for Ansible, in Python.
-"""
 
-import os
-import sys
 import argparse
+import json
+from subprocess import check_output
+import re
 
-try:
-    import json
-except ImportError:
-    import simplejson as json
 
 class CiscoDHCPInventory(object):
-
     def __init__(self):
         self.inventory = {}
         self.read_cli_args()
@@ -32,18 +25,19 @@ class CiscoDHCPInventory(object):
 
         print(json.dumps(self.inventory));
 
-    # Example inventory for testing.
+    # Getting inventory
     def get_inventory(self):
-        host_list = ['1.1.1.1', '2.2.2.2']
-        inventory = {
+        out = check_output(['ssh', '-l admin', '172.20.20.1', '-vvv', '-tt', 'sh ip dhcp bind a | inc 01.*08'])
+        host_list = [i for i in out.decode().split() if re.match('\d+\.\d+\.\d+\.\d+',i)]
+        return {
             'lab-routers': {
-                'hosts': host_list,
-                'vars': {}
+                'hosts': host_list
             },
-            '_meta': {}
+            '_meta': {
+                'hostvars': {}
+            }
         }
-        print(inventory)
-        return inventory
+
     # Empty inventory for testing.
     def empty_inventory(self):
         return {'_meta': {'hostvars': {}}}
@@ -51,9 +45,10 @@ class CiscoDHCPInventory(object):
     # Read the command line args passed to the script.
     def read_cli_args(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument('--list', action = 'store_true')
-        parser.add_argument('--host', action = 'store')
+        parser.add_argument('--list', action='store_true')
+        parser.add_argument('--host', action='store')
         self.args = parser.parse_args()
+
 
 # Get the inventory.
 CiscoDHCPInventory()

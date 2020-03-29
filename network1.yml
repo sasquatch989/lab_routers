@@ -6,8 +6,8 @@
   tasks:
   - name: config banner login
     ios_banner:
-    banner: login
-    text: |
+      banner: login
+      text: |
           I am managed by ansible
           ansible tower tho
-    state: present
+      state: present

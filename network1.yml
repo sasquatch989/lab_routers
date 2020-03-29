@@ -5,4 +5,5 @@
   hosts: all
   tasks:
   - name: Check napalm config
-    napalm_ping:
+    napalm_get_facts:
+      filter: facts,interfaces,bgp_neighbors

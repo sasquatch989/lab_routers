@@ -10,7 +10,8 @@ get_routers() {
   printf "[lab_routers]\n%s" "$ROUTERS" > lab-routers.ini
 }
   
-prep_git() {	
+prep_git() {
+  git fetch	
   if git status | grep lab-routers; then
 	git add lab-routers.*
   else

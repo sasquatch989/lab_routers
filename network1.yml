@@ -1,4 +1,5 @@
 ---
+
 - name: network1
   connection: napalm
   host: all

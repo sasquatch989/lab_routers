@@ -3,6 +3,7 @@
 - name: network2
   connection: network_cli
   hosts: all
+  gather_facts: false
   tasks:
   - name: Check router onfig
     ping:

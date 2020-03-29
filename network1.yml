@@ -3,7 +3,7 @@
 - name: network1
   connection: napalm
   hosts: all
-  task:
+  tasks:
   - name: config banner login
     ios_banner:
     banner: login

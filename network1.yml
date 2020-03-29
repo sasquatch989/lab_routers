@@ -1,7 +1,7 @@
 ---
 
 - name: network1
-  connection: network_cli
+  connection: napalm
   hosts: all
   tasks:
   - name: Check router onfig

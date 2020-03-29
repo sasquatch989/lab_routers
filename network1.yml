@@ -1,2 +1,13 @@
 ---
 - name: network1
+  connection: napalm
+  host: all
+  ansible_user: ansible
+  task:
+    - name: config banner login
+      ios_banner:
+        banner: login
+        text: |
+          I am managed by ansible
+          ansible tower tho
+        state: present

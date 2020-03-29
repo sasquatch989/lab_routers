@@ -3,7 +3,6 @@
 - name: network1
   connection: napalm
   hosts: all
-  persistent_log_messages: yes
   tasks:
   - name: config banner login
     ios_banner:

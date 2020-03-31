@@ -12,10 +12,10 @@ get_routers() {
   
 prep_git() {
   git fetch --all
-  git checkout origin/master -- inventory/lab-routers.*
+  git checkout origin/master -- inventory/lab-routers.sh
   printf "[lab_routers]\n%s" "$ROUTERS" > lab-routers.ini  
   if git status | grep lab-routers; then
-	git add lab-routers.*
+	git add lab-routers.ini
 	ship_it
   else
      exit 0
@@ -23,7 +23,7 @@ prep_git() {
 }
 
 ship_it() { 
-  git commit -m "Updated lab-routers inventory"
+  git commit -m "Updated lab-routers inventory (date)"
   git pull origin master --rebase
   git push origin master
 }

@@ -16,7 +16,7 @@ response = q.receive_messages(
     MessageAttributeNames=[
         'All'
     ],
-    VisibilityTimeout=0,
+    VisibilityTimeout=30,
     WaitTimeSeconds=20
 )
 print(response)

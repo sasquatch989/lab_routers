@@ -17,12 +17,14 @@ response = q.receive_messages(
         'All'
     ],
     VisibilityTimeout=30,
-    WaitTimeSeconds=0
+    WaitTimeSeconds=10
 )
 print(response)
-message = response[0].body
-receipt_handle = response[0].receipt_handle
-
+try:
+    message = response[0].body
+    receipt_handle = response[0].receipt_handle
+except IndexError:
+    exit()
 # Delete received message from queue
 q.delete_messages(
     Entries=[

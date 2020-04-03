@@ -18,7 +18,6 @@ while True:
     try:
         message = response[0].body
         receipt_handle = response[0].receipt_handle
-        #sleep(2)
         q.delete_messages(
             Entries=[
                 {

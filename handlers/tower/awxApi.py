@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
+
 import json
 import subprocess
 import os
 import logging
-# # Make dynamic for project seperation
+# TODO Make dynamic for project separation
+
 
 def get_token():
     if not os.getenv('TOWER_TOKEN'):

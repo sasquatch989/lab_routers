@@ -2,7 +2,7 @@
 
 import boto3
 import os
-import awxApi.AWX as awx
+from handlers.tower.awxApi import AWX
 
 # Need check if variable set
 queue_url = os.environ['SQS_GITHUB_URL']
@@ -26,6 +26,10 @@ while True:
             ]
         )
         # Insert awx call here
+        a = AWX()
+        a.get_token()
+        a.api_call()
+
         print('Message received and processed')
     except IndexError:
         print('Index is empty...')

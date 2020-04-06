@@ -6,4 +6,8 @@
   gather_facts: false
   tasks:
   - name: Check router onfig
-    ping:
+    ios_banner:
+      banner: login
+      text: |
+        'This is your new login messages'
+      state: present

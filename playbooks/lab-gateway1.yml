@@ -7,5 +7,5 @@
   tasks:
   - name: Get DHCP Bindings
     ios_command:
-      commands: show ip dhcp bindings
+      commands: show ip dhcp bind
 

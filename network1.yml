@@ -1,9 +1,0 @@
----
-
-- name: network1
-  connection: napalm
-  hosts: all
-  gather_facts: false
-  tasks:
-  - name: Check router onfig
-    ping:

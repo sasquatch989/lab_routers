@@ -1,0 +1,11 @@
+---
+
+- name: Update lab
+  connection: ios
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Get DHCP Bindings
+    ios_command:
+      commands: show ip dhcp bindings
+

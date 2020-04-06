@@ -1,6 +1,11 @@
-import boto3
+#!/usr/bin/env python3
 
-queue_url = 'https://sqs.us-east-1.amazonaws.com/477286093069/github_webhook_sqs'
+import boto3
+import os
+from handlers.tower.awxApi import AWX
+
+# Need check if variable set
+queue_url = os.environ['SQS_GITHUB_URL']
 sqs = boto3.resource('sqs', region_name='us-east-1')
 
 q = sqs.Queue(queue_url)
@@ -16,14 +21,15 @@ while True:
     try:
         message = response[0].body
         receipt_handle = response[0].receipt_handle
-        q.delete_messages(
-            Entries=[
-                {
-                    'Id': response[0].attributes['SentTimestamp'],
-                    'ReceiptHandle': receipt_handle
-                }
+        q.delete_messages(Entries=[
+            {'Id': response[0].attributes['SentTimestamp'], 'ReceiptHandle': receipt_handle}
             ]
         )
+        # Insert awx call here
+        a = AWX()
+        a.get_token()
+        a.api_call()
+
         print('Message received and processed')
     except IndexError:
         print('Index is empty...')

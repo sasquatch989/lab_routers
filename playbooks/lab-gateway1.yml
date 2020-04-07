@@ -14,6 +14,6 @@
     register: dhcp_bindings
 
   - debug:
-      var: dhcp_bindings
+      var: dhcp_bindings['stdout_lines']
 
 

@@ -26,9 +26,9 @@ while True:
             ]
         )
         # Insert awx call here
-        a = AWX()
-        a.get_token()
-        a.api_call()
+        awx = AWX()
+        awx.get_token()
+        awx.api_call()
 
         print('Message received and processed')
     except IndexError:

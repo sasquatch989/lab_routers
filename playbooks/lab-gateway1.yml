@@ -13,4 +13,4 @@
       commands: show ip dhcp bind | inc 01.*\.08
       register: dhcp_bindings
 
-  debug: var=dhcp_bindings
+  - debug: var=dhcp_bindings

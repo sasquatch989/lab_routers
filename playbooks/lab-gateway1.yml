@@ -5,6 +5,12 @@
   hosts: all
   gather_facts: false
   tasks:
+  - name: Get IOS Facts
+    ios_facts:
+      gather_subset: all
   - name: Get DHCP Bindings
     ios_command:
       commands: show ip dhcp bind | inc 01.*\.08
+      register: dhcp_bindings
+
+  debug: var=dhcp_bindings

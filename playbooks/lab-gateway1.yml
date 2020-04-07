@@ -7,5 +7,4 @@
   tasks:
   - name: Get DHCP Bindings
     ios_command:
-      commands: show ip dhcp bind | | inc 01.*\.08"
-      register: dhcp_bindings
+      commands: show ip dhcp bind | inc 01.*\.08"

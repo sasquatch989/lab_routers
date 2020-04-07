@@ -10,7 +10,7 @@ import logging
 
 
 class AWX:
-    def get_token():
+    def get_token(self):
         if not os.getenv('TOWER_TOKEN'):
             login = subprocess.run(['awx', 'login'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         else:

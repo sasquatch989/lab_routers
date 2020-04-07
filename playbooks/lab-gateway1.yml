@@ -1,10 +1,10 @@
 ---
 
-- name: Update lab
+- name: Update lab-router inventory
   connection: network_cli
   hosts: all
   gather_facts: false
   tasks:
   - name: Get DHCP Bindings
     ios_command:
-      commands: show ip dhcp bind | inc 01.*\.08"
+      commands: show ip dhcp bind | inc 01.*\.08

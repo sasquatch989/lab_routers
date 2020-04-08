@@ -1,28 +1,28 @@
 #!/usr/bin/env python
 
-'''
+"""
 Example custom dynamic inventory script for Ansible, in Python.
-'''
+"""
 
-import os
-import sys
+
 import argparse
+import json
+from subprocess import check_output
+import re
 
-try:
-    import json
-except ImportError:
-    import simplejson as json
 
 class CiscoDHCPInventory(object):
-
+    print('In the class now')
     def __init__(self):
         self.inventory = {}
         self.read_cli_args()
 
         # Called with `--list`.
+        print('Called with --list')
         if self.args.list:
             self.inventory = self.get_inventory()
         # Called with `--host [hostname]`.
+        print('Called with --host')
         elif self.args.host:
             # Not implemented, since we return _meta info `--list`.
             self.inventory = self.empty_inventory()
@@ -32,27 +32,19 @@ class CiscoDHCPInventory(object):
 
         print(json.dumps(self.inventory));
 
-    # Example inventory for testing.
+    # Getting inventory
     def get_inventory(self):
+        print('Getting inventory')
+        out = check_output(['ssh', 'admin@172.20.20.1', "sh ip dhcp bind a | inc 01.*08"])
+        print(out)
+        host_list = [i for i in out.decode().split() if re.match('\d+\.\d+\.\d+\.\d+',i)]
+        print(host_list)
         return {
-            'group': {
-                'hosts': ['192.168.28.71', '192.168.28.72'],
-                'vars': {
-                    'ansible_ssh_user': 'vagrant',
-                    'ansible_ssh_private_key_file':
-                        '~/.vagrant.d/insecure_private_key',
-                    'example_variable': 'value'
-                }
+            'lab-routers': {
+                'hosts': host_list
             },
             '_meta': {
-                'hostvars': {
-                    '192.168.28.71': {
-                        'host_specific_var': 'foo'
-                    },
-                    '192.168.28.72': {
-                        'host_specific_var': 'bar'
-                    }
-                }
+                'hostvars': {}
             }
         }
 
@@ -63,9 +55,10 @@ class CiscoDHCPInventory(object):
     # Read the command line args passed to the script.
     def read_cli_args(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument('--list', action = 'store_true')
-        parser.add_argument('--host', action = 'store')
+        parser.add_argument('--list', action='store_true')
+        parser.add_argument('--host', action='store')
         self.args = parser.parse_args()
+
 
 # Get the inventory.
 CiscoDHCPInventory()

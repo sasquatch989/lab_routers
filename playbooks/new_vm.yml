@@ -5,3 +5,18 @@
   gather_facts: true
   roles:
     - { role: pgkehle.virsh }
+  vars:
+    flags: '{{ flags }}'
+    vm_name: '{{ vm_name }}'
+    vm_cfg:
+      storage:
+        primary:
+          size: '{{ primary_storage_size }}'
+          type: xfs
+          name: vda
+      vcpus: 4
+      memory:
+        size: 4096
+      graphics:
+        vnc:
+          port: 5900

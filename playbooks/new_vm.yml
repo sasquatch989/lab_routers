@@ -1,7 +1,6 @@
 ---
 
 - name: Create new VM
-  connection: network_cli
   hosts: '{{ kvm_host }}'
   gather_facts: true
   roles:

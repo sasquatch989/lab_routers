@@ -2,15 +2,7 @@
 
 - name: Create new VM
   connection: network_cli
-  hosts: lab-infra
+  hosts: '{{ kvm_host }}'
   gather_facts: true
-  tasks:
-  - name: Get IOS Facts
-    command: "ls {{ vm_pool_path }}
-    register: disks
-  - name: Get DHCP Bindings
-    ios_command:
-      commands: show ip dhcp bind | inc 01.*\.08
-    register: dhcp_bindings
-
-  - debug:
+  roles:
+    - { role: virsh }
